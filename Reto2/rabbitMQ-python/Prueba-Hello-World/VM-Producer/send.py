@@ -2,7 +2,8 @@
 #!/usr/bin/env python
 import pika
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost')) #We're connected now, to a broker on the local machine
+connection = pika.BlockingConnection(
+  pika.ConnectionParameters('localhost')) #We're connected now, to a broker on the local machine
 channel = connection.channel()
 
 #Create the hello Queue
