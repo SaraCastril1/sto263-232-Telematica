@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 import pika, sys, os
 
+def callback(ch, method, properties, body):
+        print(f" [x] Received {body}")
+
 def main():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
@@ -10,9 +13,6 @@ def main():
 #Receiving messages from the queue is more complex. It works by subscribing a callback function to a queue. 
 #Whenever we receive a message, this callback function is called by the Pika library. In our case this function 
 #will print on the screen the contents of the message.
-
-    def callback(ch, method, properties, body):
-        print(f" [x] Received {body}")
 
     channel.basic_consume(queue='hello', on_message_callback=callback, auto_ack=True)
 
